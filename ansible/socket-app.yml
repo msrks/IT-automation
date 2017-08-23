@@ -1,12 +1,33 @@
 - hosts: child
   remote_user: pi
-  sudo: yes
+  become: yes
   gather_facts: no
   tasks:
-    - name: apt install pip
+    - name: ルーティングテーブル変更
+      shell: route del default gw 10.0.0.1
+      ignore_errors: yes
+
+    - name: pipのインストール
       apt:
         name: python-pip
         state: present
-    - name: pip install timeout_decorator
+    - name: timeout_decoratorのインストール
       pip:
-        name: bottle
+        name: timeout_decorator
+        state: present
+    - name: gitのインストール
+      apt:
+        name: git
+    - name: gitをcloneする
+      git:
+        repo: https://github.com/MitsuhiroIto/socket-app.git
+        dest: ~
+        update: yes
+    - name: clone設定1
+      shell: echo "cd /socket-app; while true; do python child.py; done;" > reply2kasumin.sh
+    - name: clone設定2
+      shell: echo "@reboot sh reply2kasumin.sh" > cron.conf
+    - name: clone設定3
+      shell: crontab cron.conf
+    - name: rebootする
+      shell: reboot

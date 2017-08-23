@@ -1,5 +1,4 @@
 [parent]
 192.168.11.109
 [child]
-192.168.11.[171:180]
-192.168.11.[190:196]
+192.168.11.[161:164] ansible_ssh_user=pi ansible_ssh_pass=raspberry
