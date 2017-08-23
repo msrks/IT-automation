@@ -4,7 +4,7 @@
 
 ```
 $ cd ansible
-$ ansible-playbook -i child socket-app.yml
+$ ansible-playbook -i hosts socket-app.yml
 ```
 
 ### fabric

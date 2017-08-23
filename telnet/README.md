@@ -1,6 +1,6 @@
 ### usage
 
 ```
-$ sh do_telnet.sh <num_nodes>
+$ sh get_log.sh <num_nodes>
 ```
 
